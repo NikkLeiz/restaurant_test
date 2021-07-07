@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from .models import Person
-from datetime import datetime, timedelta, tzinfo
+from datetime import datetime
 
 class PersonSerializer(serializers.ModelSerializer):
     age = serializers.SerializerMethodField()
@@ -15,7 +15,7 @@ class PersonSerializer(serializers.ModelSerializer):
         """
         Check that the IIN is correct.
         """
-        if not data['iin'].isnumeric() or len(data['iin']) > 12:
+        if not data['iin'].isnumeric() or len(data['iin']) != 12:
             raise serializers.ValidationError("Invalid input")
         return data
     
